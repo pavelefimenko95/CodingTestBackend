@@ -6,5 +6,5 @@ export class Owner extends Model<Owner> {
     name: string;
 
     @Column
-    purchaseDate: string;
+    purchaseDate: Date;
 }
