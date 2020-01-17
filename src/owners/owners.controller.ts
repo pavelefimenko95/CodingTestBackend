@@ -1,4 +1,4 @@
-import { Controller, Body, Param, Get, Post, Delete } from '@nestjs/common';
+import { Controller, Body, Param, Get, Post, Delete, HttpException } from '@nestjs/common';
 import { OwnerDto } from './dto/owner.dto';
 import { OwnersService } from './owners.service';
 import { Owner } from './owner.entity';
@@ -7,17 +7,29 @@ import { Owner } from './owner.entity';
 export class OwnersController {
     constructor(private readonly ownersService: OwnersService) {}
     @Get()
-    findAll(): Promise<Owner[]> {
-        return this.ownersService.findAll();
+    async findAll(): Promise<Owner[]> {
+        try {
+            return await this.ownersService.findAll();
+        } catch (e) {
+            throw new HttpException(e, 422);
+        }
     }
 
     @Post()
-    create(@Body() ownerDto: OwnerDto): Promise<Owner> {
-        return this.ownersService.create(ownerDto);
+    async create(@Body() ownerDto: OwnerDto): Promise<Owner> {
+        try {
+            return await this.ownersService.create(ownerDto);
+        } catch (e) {
+            throw new HttpException(e, 422);
+        }
     }
 
     @Delete(':id')
-    delete(@Param('id') id: string) {
-        return this.ownersService.delete(id);
+    async delete(@Param('id') id: string) {
+        try {
+            return await this.ownersService.delete(id);
+        } catch(e) {
+            throw new HttpException(e, 422);
+        }
     }
 }
