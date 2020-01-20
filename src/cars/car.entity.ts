@@ -14,7 +14,7 @@ export class Car extends Model<Car> {
     @Column
     firstRegistrationDate: Date;
 
-    @HasMany(() => Owner)
+    @HasMany(() => Owner, {onDelete: 'CASCADE'})
     owners: Owner[];
 
     @NotEmpty

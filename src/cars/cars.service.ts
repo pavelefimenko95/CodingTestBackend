@@ -12,14 +12,21 @@ export class CarsService {
         return this.carsRepository.findAll<Car>();
     }
 
-    findOne(id: string): Promise<Car> {
+    findOne(id: string, options?): Promise<Car> {
         return this.carsRepository.findOne<Car>({
             where: {id},
+            ...options,
         });
     }
 
     create(carDto: CarDto): Promise<Car> {
         return this.carsRepository.create<Car>(carDto);
+    }
+
+    update(carDto: CarDto): Promise<[number, Car[]]> {
+        return this.carsRepository.update(carDto, {
+            where: {id: carDto.id},
+        });
     }
 
     delete(id: string): Promise<number> {

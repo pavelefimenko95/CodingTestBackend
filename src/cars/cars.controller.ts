@@ -1,5 +1,6 @@
-import { Controller, Body, Param, Get, Post, Delete, HttpException } from '@nestjs/common';
+import { Controller, Body, Param, Get, Post, Put, Delete, HttpException } from '@nestjs/common';
 import { CarDto } from './dto/car.dto';
+import { Manufacturer } from '../manufacturers/manufacturer.entity';
 import { CarsService } from './cars.service';
 import { Car } from './car.entity';
 
@@ -24,11 +25,31 @@ export class CarsController {
         }
     }
 
+    @Get(':id/manufacturer')
+    async findManufacturer(@Param('id') id: string): Promise<Manufacturer> {
+        try {
+            return (await this.carsService.findOne(id, {
+                include: [{model: Manufacturer}],
+            })).manufacturer;
+        } catch (e) {
+            throw new HttpException(e, 422);
+        }
+    }
+
     @Post()
     async create(@Body() carDto: CarDto): Promise<Car> {
         try {
             return await this.carsService.create(carDto);
         } catch (e) {
+            throw new HttpException(e, 422);
+        }
+    }
+
+    @Put()
+    async update(@Body() carDto: CarDto): Promise<[number, Car[]]> {
+        try {
+            return await this.carsService.update(carDto);
+        } catch(e) {
             throw new HttpException(e, 422);
         }
     }
