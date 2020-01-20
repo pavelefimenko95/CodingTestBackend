@@ -1,18 +1,39 @@
-import { Test, TestingModule } from '@nestjs/testing';
+import { Test } from '@nestjs/testing';
 import { ManufacturersController } from './manufacturers.controller';
+import { ManufacturersService } from './manufacturers.service';
+import { Manufacturer } from './manufacturer.entity';
+import { DatabaseModule } from '../database/database.module';
+import { MANUFACTURERS_REPOSITORY } from '../constants/database';
 
-describe('Manufacturers Controller', () => {
-  let controller: ManufacturersController;
+describe('ManufacturersController', () => {
+    let manufacturersController: ManufacturersController;
+    let manufacturersService: ManufacturersService;
 
-  beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
-      controllers: [ManufacturersController],
-    }).compile();
+    beforeEach(async () => {
+        const module = await Test.createTestingModule({
+            imports: [DatabaseModule],
+            controllers: [ManufacturersController],
+            providers: [
+                {
+                    provide: MANUFACTURERS_REPOSITORY,
+                    useValue: Manufacturer,
+                },
+                ManufacturersService,
+            ],
+        }).compile();
 
-    controller = module.get<ManufacturersController>(ManufacturersController);
-  });
+        manufacturersService = module.get<ManufacturersService>(ManufacturersService);
+        manufacturersController = module.get<ManufacturersController>(ManufacturersController);
+    });
 
-  it('should be defined', () => {
-    expect(controller).toBeDefined();
-  });
+    describe('findAll', () => {
+        it('should return an array of manufacturers', async () => {
+            const result = [
+                new Manufacturer(),
+            ];
+            jest.spyOn(manufacturersService, 'findAll').mockImplementation(async () => result);
+
+            expect(await manufacturersController.findAll()).toBe(result);
+        });
+    });
 });

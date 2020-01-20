@@ -3,7 +3,9 @@ services:
   app:
     container_name: CodingTestBackEnd
     restart: always
-    build: .
+    build:
+      context: .
+      dockerfile: ./Dockerfile.test
     ports:
       - '3000:3000'
     links:

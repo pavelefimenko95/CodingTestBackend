@@ -1,18 +1,39 @@
-import { Test, TestingModule } from '@nestjs/testing';
+import { Test } from '@nestjs/testing';
 import { OwnersController } from './owners.controller';
+import { OwnersService } from './owners.service';
+import { Owner } from './owner.entity';
+import { DatabaseModule } from '../database/database.module';
+import { OWNERS_REPOSITORY } from '../constants/database';
 
-describe('Owners Controller', () => {
-  let controller: OwnersController;
+describe('OwnersController', () => {
+    let ownersController: OwnersController;
+    let ownersService: OwnersService;
 
-  beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
-      controllers: [OwnersController],
-    }).compile();
+    beforeEach(async () => {
+        const module = await Test.createTestingModule({
+            imports: [DatabaseModule],
+            controllers: [OwnersController],
+            providers: [
+                {
+                    provide: OWNERS_REPOSITORY,
+                    useValue: Owner,
+                },
+                OwnersService,
+            ],
+        }).compile();
 
-    controller = module.get<OwnersController>(OwnersController);
-  });
+        ownersService = module.get<OwnersService>(OwnersService);
+        ownersController = module.get<OwnersController>(OwnersController);
+    });
 
-  it('should be defined', () => {
-    expect(controller).toBeDefined();
-  });
+    describe('findAll', () => {
+        it('should return an array of owners', async () => {
+            const result = [
+                new Owner(),
+            ];
+            jest.spyOn(ownersService, 'findAll').mockImplementation(async () => result);
+
+            expect(await ownersController.findAll()).toBe(result);
+        });
+    });
 });
