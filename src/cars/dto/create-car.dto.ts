@@ -1,4 +1,4 @@
-export class CarDto {
+export class CreateCarDto {
     readonly id?: number;
     readonly manufacturer: string;
     readonly price: number;

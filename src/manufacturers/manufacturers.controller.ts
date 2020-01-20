@@ -30,7 +30,9 @@ export class ManufacturersController {
     @Delete(':id')
     async delete(@Param('id') id: string): Promise<number> {
         try {
-            return await this.manufacturersService.delete(id);
+            return await this.manufacturersService.delete({
+                where: {id},
+            });
         } catch(e) {
             throw new HttpException(e, 422);
         }

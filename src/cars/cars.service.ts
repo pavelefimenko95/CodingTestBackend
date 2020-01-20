@@ -1,15 +1,17 @@
 import { Injectable, Inject } from '@nestjs/common';
 import { Car } from './car.entity';
-import { CarDto } from './dto/car.dto';
+import { CreateCarDto } from './dto/create-car.dto';
+import { UpdateCarDto } from './dto/update-car.dto';
+import { CARS_REPOSITORY } from '../constants/database';
 
 @Injectable()
 export class CarsService {
     constructor(
-        @Inject('CARS_REPOSITORY') private readonly carsRepository: typeof Car,
+        @Inject(CARS_REPOSITORY) private readonly carsRepository: typeof Car,
     ) {}
 
-    findAll(): Promise<Car[]> {
-        return this.carsRepository.findAll<Car>();
+    findAll(options?: object): Promise<Car[]> {
+        return this.carsRepository.findAll<Car>(options);
     }
 
     findOne(id: string, options?): Promise<Car> {
@@ -19,19 +21,15 @@ export class CarsService {
         });
     }
 
-    create(carDto: CarDto): Promise<Car> {
-        return this.carsRepository.create<Car>(carDto);
+    create(createCarDto: CreateCarDto): Promise<Car> {
+        return this.carsRepository.create<Car>(createCarDto);
     }
 
-    update(carDto: CarDto): Promise<[number, Car[]]> {
-        return this.carsRepository.update(carDto, {
-            where: {id: carDto.id},
-        });
+    update(updateCarDto: UpdateCarDto, options): Promise<[number, Car[]]> {
+        return this.carsRepository.update(updateCarDto, options);
     }
 
-    delete(id: string): Promise<number> {
-        return this.carsRepository.destroy({
-            where: {id},
-        });
+    delete(options: object): Promise<number> {
+        return this.carsRepository.destroy(options);
     }
 }

@@ -27,7 +27,9 @@ export class OwnersController {
     @Delete(':id')
     async delete(@Param('id') id: string) {
         try {
-            return await this.ownersService.delete(id);
+            return await this.ownersService.delete({
+                where: {id},
+            });
         } catch(e) {
             throw new HttpException(e, 422);
         }
