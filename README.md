@@ -279,7 +279,7 @@ $ npm run compose:test:e2e
 ]
 ```
 
-## Create manufacturer
+## Create owner
 
 ***URL*** : `/owners`
 
@@ -312,7 +312,7 @@ $ npm run compose:test:e2e
 }
 ```
 
-## Delete manufacturer
+## Delete owner
 
 ***URL*** : `/owners/:id`
 
