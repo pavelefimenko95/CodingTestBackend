@@ -23,7 +23,7 @@ $ npm run compose:test:e2e
 
 # Api documentation
 
-**Base url**: http:/localhost:3000
+**Base url**: http://localhost:3000
 
 ## Get manufacturers
 
