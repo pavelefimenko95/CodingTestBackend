@@ -1,5 +1,5 @@
 export class OwnerDto {
     readonly name: string;
-    readonly purchaseDate: Date;
+    readonly purchaseDate: string;
     readonly carId: string;
 }

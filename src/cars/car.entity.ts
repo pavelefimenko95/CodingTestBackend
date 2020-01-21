@@ -17,8 +17,6 @@ export class Car extends Model<Car> {
     @HasMany(() => Owner, {onDelete: 'CASCADE'})
     owners: Owner[];
 
-    @NotEmpty
-    @AllowNull(false)
     @ForeignKey(() => Manufacturer)
     @Column
     manufacturerId: number;

@@ -11,6 +11,8 @@
     "start": "nest start",
     "compose": "sudo docker-compose down && sudo docker-compose build --no-cache && sudo docker-compose up",
     "compose:test": "sudo docker-compose --file docker-compose.test.yml down && sudo docker-compose --file docker-compose.test.yml build && sudo docker-compose --file docker-compose.test.yml up",
+    "compose:test:e2e": "sudo docker-compose --file docker-compose.test.e2e.yml down && sudo docker-compose --file docker-compose.test.e2e.yml build && sudo docker-compose --file docker-compose.test.e2e.yml up",
+    "docker:clear:cache": "sudo docker system prune -a && sudo docker volume prune",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",

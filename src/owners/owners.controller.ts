@@ -25,12 +25,12 @@ export class OwnersController {
     }
 
     @Delete(':id')
-    async delete(@Param('id') id: string) {
+    async delete(@Param('id') id: string): Promise<number> {
         try {
             return await this.ownersService.delete({
                 where: {id},
             });
-        } catch(e) {
+        } catch (e) {
             throw new HttpException(e, 422);
         }
     }

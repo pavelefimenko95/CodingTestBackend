@@ -43,7 +43,7 @@ describe('OwnersController', () => {
             const result = new Owner();
             const ownerDto: OwnerDto = {
                 name: 'pavel',
-                purchaseDate: new Date('2019-10-15'),
+                purchaseDate: '2019-10-15',
                 carId: '1',
             };
 

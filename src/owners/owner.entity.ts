@@ -13,8 +13,6 @@ export class Owner extends Model<Owner> {
     @Column
     purchaseDate: Date;
 
-    @NotEmpty
-    @AllowNull(false)
     @ForeignKey(() => Car)
     @Column
     carId: number;
