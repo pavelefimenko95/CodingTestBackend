@@ -1,16 +1,16 @@
-## Installation
+# Installation
 
 ```bash
 $ npm install
 ```
 
-## Running the app
+# Running the app
 
 ```bash
 $ npm run compose
 ```
 
-## Test
+# Test
 
 ```bash
 # unit
@@ -21,11 +21,11 @@ $ npm run compose:test:e2e
 ```
 
 
-## Api documentation
+# Api documentation
 
 **Base url**: http:/localhost:3000
 
-### Get manufacturers
+## Get manufacturers
 
 ***URL*** : `/manufacturers`
 
@@ -58,7 +58,7 @@ $ npm run compose:test:e2e
 ]
 ```
 
-### Create manufacturer
+## Create manufacturer
 
 ***URL*** : `/manufacturers`
 
@@ -91,7 +91,7 @@ $ npm run compose:test:e2e
 }
 ```
 
-### Delete manufacturer
+## Delete manufacturer
 
 ***URL*** : `/manufacturers/:id`
 
@@ -107,7 +107,7 @@ $ npm run compose:test:e2e
 1
 ```
 
-### Get cars
+## Get cars
 
 ***URL*** : `/cars`
 
@@ -132,7 +132,7 @@ $ npm run compose:test:e2e
 ]
 ```
 
-### Get car
+## Get car
 
 ***URL*** : `/cars/:id`
 
@@ -155,7 +155,7 @@ $ npm run compose:test:e2e
 }
 ```
 
-### Get car manufacturer
+## Get car manufacturer
 
 ***URL*** : `/cars/:id/manufacturer`
 
@@ -178,7 +178,7 @@ $ npm run compose:test:e2e
 }
 ```
 
-### Create car
+## Create car
 
 ***URL*** : `/cars`
 
@@ -211,23 +211,7 @@ $ npm run compose:test:e2e
 }
 ```
 
-### Delete manufacturer
-
-***URL*** : `/cars/:id`
-
-***Method*** : `DELETE`
-
-#### Success Response
-
-***Code*** : `200 OK`
-
-**Response example**
-
-```json
-1
-```
-
-### Update car
+## Update car
 
 ***URL*** : `/cars`
 
@@ -254,7 +238,7 @@ $ npm run compose:test:e2e
 [1]
 ```
 
-### Delete car
+## Delete car
 
 ***URL*** : `/cars/:id`
 
@@ -270,7 +254,7 @@ $ npm run compose:test:e2e
 1
 ```
 
-### Get owners
+## Get owners
 
 ***URL*** : `/owners`
 
@@ -295,7 +279,7 @@ $ npm run compose:test:e2e
 ]
 ```
 
-### Create manufacturer
+## Create manufacturer
 
 ***URL*** : `/owners`
 
@@ -328,7 +312,7 @@ $ npm run compose:test:e2e
 }
 ```
 
-### Delete manufacturer
+## Delete manufacturer
 
 ***URL*** : `/owners/:id`
 
@@ -344,7 +328,7 @@ $ npm run compose:test:e2e
 1
 ```
 
-### Handle outdated content
+## Handle outdated content
 
 ***URL*** : `/actions/handle-deprecations`
 
