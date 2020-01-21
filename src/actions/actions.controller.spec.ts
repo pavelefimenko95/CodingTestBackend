@@ -37,9 +37,16 @@ describe('ActionsController', () => {
 
     describe('handleDeprecations', () => {
         it('should return undefined', async () => {
-            jest.spyOn(ownersService, 'delete').mockImplementation(async () => 1);
+            const result = undefined;
+            const deletedOwnersCount: number = 1;
+            const carsToApplyDiscount = [...new Array(5)].map(() => new Car());
+            const updateResult: [number, Car[]] = [1, [new Car()]];
 
-            expect(await actionsController.handleDeprecations()).toBe(undefined);
+            jest.spyOn(ownersService, 'delete').mockImplementation(async () => deletedOwnersCount);
+            jest.spyOn(carsService, 'findAll').mockImplementation(async () => carsToApplyDiscount);
+            jest.spyOn(carsService, 'update').mockImplementation(async () => updateResult);
+
+            expect(await actionsController.handleDeprecations()).toBe(result);
         });
     });
 });

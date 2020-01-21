@@ -2,6 +2,7 @@ import { Test } from '@nestjs/testing';
 import { ManufacturersController } from './manufacturers.controller';
 import { ManufacturersService } from './manufacturers.service';
 import { Manufacturer } from './manufacturer.entity';
+import { ManufacturerDto } from './dto/manufacturer.dto';
 import { DatabaseModule } from '../database/database.module';
 import { MANUFACTURERS_REPOSITORY } from '../constants/database';
 
@@ -34,6 +35,32 @@ describe('ManufacturersController', () => {
             jest.spyOn(manufacturersService, 'findAll').mockImplementation(async () => result);
 
             expect(await manufacturersController.findAll()).toBe(result);
+        });
+    });
+
+    describe('create', () => {
+        it('should return a Manufacturer', async () => {
+            const result = new Manufacturer();
+            const manufacturerDto: ManufacturerDto = {
+                name: 'pl',
+                phone: '+302342344334',
+                siret: 234234234,
+            };
+
+            jest.spyOn(manufacturersService, 'create').mockImplementation(async () => result);
+
+            expect(await manufacturersController.create(manufacturerDto)).toBe(result);
+        });
+    });
+
+    describe('delete', () => {
+        it('should return deleted rows count', async () => {
+            const result: number = 1;
+            const manufacturerToDeleteId = '1';
+
+            jest.spyOn(manufacturersService, 'delete').mockImplementation(async () => result);
+
+            expect(await manufacturersController.delete(manufacturerToDeleteId)).toBe(result);
         });
     });
 });
