@@ -1,17 +1,24 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller } from '@nestjs/common';
 import { OwnersService } from '../owners/owners.service';
 import { CarsService } from '../cars/cars.service';
 import { Op } from 'sequelize';
 import * as moment from 'moment';
+import { CronJob } from 'cron';
 
 @Controller('actions')
 export class ActionsController {
+    private readonly CRON_PATTERN = '0 0 * * *';
+
     constructor(
         private readonly ownersService: OwnersService,
         private readonly carsService: CarsService,
-    ) {}
+    ) {
+        new CronJob(
+            this.CRON_PATTERN,
+            this.handleDeprecations.bind(this),
+        ).start();
+    }
 
-    @Get('handle-deprecations')
     async handleDeprecations(): Promise<void> {
         const DISCOUNT = 0.8;
 
