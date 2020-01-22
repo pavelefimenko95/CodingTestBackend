@@ -25,4 +25,4 @@ $ npm run compose:test:e2e
 
 **Base URL:** http://localhost:3000
 
-Go to /api-documentation to read the automatically generated API docs.
+Go to **/api-documentation** to read the automatically generated API docs.
