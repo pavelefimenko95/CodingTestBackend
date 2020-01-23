@@ -2,7 +2,7 @@ import { Test } from '@nestjs/testing';
 import { ManufacturersController } from './manufacturers.controller';
 import { ManufacturersService } from './manufacturers.service';
 import { Manufacturer } from './manufacturer.entity';
-import { ManufacturerDto } from './dto/manufacturer.dto';
+import { CreateManufacturerDto } from './dto/create-manufacturer.dto';
 import { DatabaseModule } from '../database/database.module';
 import { MANUFACTURERS_REPOSITORY } from '../constants/database';
 
@@ -41,7 +41,7 @@ describe('ManufacturersController', () => {
     describe('create', () => {
         it('should return a Manufacturer', async () => {
             const result = new Manufacturer();
-            const manufacturerDto: ManufacturerDto = {
+            const createManufacturerDto: CreateManufacturerDto = {
                 name: 'pl',
                 phone: '+302342344334',
                 siret: 234234234,
@@ -49,7 +49,7 @@ describe('ManufacturersController', () => {
 
             jest.spyOn(manufacturersService, 'create').mockImplementation(async () => result);
 
-            expect(await manufacturersController.create(manufacturerDto)).toBe(result);
+            expect(await manufacturersController.create(createManufacturerDto)).toBe(result);
         });
     });
 

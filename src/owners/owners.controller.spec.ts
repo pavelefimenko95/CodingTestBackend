@@ -2,7 +2,7 @@ import { Test } from '@nestjs/testing';
 import { OwnersController } from './owners.controller';
 import { OwnersService } from './owners.service';
 import { Owner } from './owner.entity';
-import { OwnerDto } from './dto/owner.dto';
+import { CreateOwnerDto } from './dto/create-owner.dto';
 import { DatabaseModule } from '../database/database.module';
 import { OWNERS_REPOSITORY } from '../constants/database';
 
@@ -41,7 +41,7 @@ describe('OwnersController', () => {
     describe('create', () => {
         it('should return an Owner', async () => {
             const result = new Owner();
-            const ownerDto: OwnerDto = {
+            const createOwnerDto: CreateOwnerDto = {
                 name: 'pavel',
                 purchaseDate: '2019-10-15',
                 carId: '1',
@@ -49,7 +49,7 @@ describe('OwnersController', () => {
 
             jest.spyOn(ownersService, 'create').mockImplementation(async () => result);
 
-            expect(await ownersController.create(ownerDto)).toBe(result);
+            expect(await ownersController.create(createOwnerDto)).toBe(result);
         });
     });
 

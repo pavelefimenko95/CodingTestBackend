@@ -1,6 +1,6 @@
 import { Injectable, Inject } from '@nestjs/common';
 import { Manufacturer } from './manufacturer.entity';
-import { ManufacturerDto } from './dto/manufacturer.dto';
+import { CreateManufacturerDto } from './dto/create-manufacturer.dto';
 import { MANUFACTURERS_REPOSITORY } from '../constants/database';
 
 @Injectable()
@@ -13,8 +13,8 @@ export class ManufacturersService {
         return this.manufacturersRepository.findAll<Manufacturer>(options);
     }
 
-    create(manufacturerDto: ManufacturerDto): Promise<Manufacturer> {
-        return this.manufacturersRepository.create<Manufacturer>(manufacturerDto);
+    create(createManufacturerDto: CreateManufacturerDto): Promise<Manufacturer> {
+        return this.manufacturersRepository.create<Manufacturer>(createManufacturerDto);
     }
 
     delete(options: object): Promise<number> {

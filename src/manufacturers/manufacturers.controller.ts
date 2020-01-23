@@ -1,7 +1,7 @@
 import { Controller, Body, Param, Get, Post, Delete, HttpException } from '@nestjs/common';
 import { ManufacturersService } from './manufacturers.service';
 import { Manufacturer } from './manufacturer.entity';
-import { ManufacturerDto } from './dto/manufacturer.dto';
+import { CreateManufacturerDto } from './dto/create-manufacturer.dto';
 
 @Controller('manufacturers')
 export class ManufacturersController {
@@ -19,9 +19,9 @@ export class ManufacturersController {
     }
 
     @Post()
-    async create(@Body() manufacturerDto: ManufacturerDto): Promise<Manufacturer> {
+    async create(@Body() createManufacturerDto: CreateManufacturerDto): Promise<Manufacturer> {
         try {
-            return await this.manufacturersService.create(manufacturerDto);
+            return await this.manufacturersService.create(createManufacturerDto);
         } catch (e) {
             throw new HttpException(e, 422);
         }

@@ -18,6 +18,9 @@ $ npm run compose:test
 
 # e2e
 $ npm run compose:test:e2e
+
+
+// run with 'sudo' on unix
 ```
 
 

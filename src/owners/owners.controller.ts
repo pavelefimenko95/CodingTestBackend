@@ -1,5 +1,5 @@
 import { Controller, Body, Param, Get, Post, Delete, HttpException } from '@nestjs/common';
-import { OwnerDto } from './dto/owner.dto';
+import { CreateOwnerDto } from './dto/create-owner.dto';
 import { OwnersService } from './owners.service';
 import { Owner } from './owner.entity';
 
@@ -16,9 +16,9 @@ export class OwnersController {
     }
 
     @Post()
-    async create(@Body() ownerDto: OwnerDto): Promise<Owner> {
+    async create(@Body() createOwnerDto: CreateOwnerDto): Promise<Owner> {
         try {
-            return await this.ownersService.create(ownerDto);
+            return await this.ownersService.create(createOwnerDto);
         } catch (e) {
             throw new HttpException(e, 422);
         }
