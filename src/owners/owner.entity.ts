@@ -17,6 +17,6 @@ export class Owner extends Model<Owner> {
     @Column
     carId: number;
 
-    @BelongsTo(() => Car)
+    @BelongsTo(() => Car, {onDelete: 'cascade'})
     car: Car;
 }

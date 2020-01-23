@@ -5,14 +5,18 @@ import { INestApplication } from '@nestjs/common';
 
 export default () => {
     let app: INestApplication;
+
+    const dtoCommonFields = {
+        name: 'pavel',
+        purchaseDate: '2019-10-15T00:00:00.000Z',
+    };
+
     const ownersService = {
-        findAll: () => ({
-            name: 'pavel',
-            purchaseDate: '2019-10-15T00:00:00.000Z',
-        }),
+        findAll: () => dtoCommonFields,
         create: () => ({
-            name: 'pavel',
-            purchaseDate: '2019-10-15T00:00:00.000Z',
+            id: 1,
+            carId: 1,
+            ...dtoCommonFields,
         }),
     };
 
@@ -31,8 +35,8 @@ export default () => {
     it(`/POST owners`, done => {
         const ownerDto = {
             id: 1,
-            name: 'pavel',
-            purchaseDate: '2019-10-15T00:00:00.000Z',
+            carId: 1,
+            ...dtoCommonFields,
         };
 
         return request(app.getHttpServer())
@@ -43,6 +47,8 @@ export default () => {
             .expect(201)
             .expect(({body}) => {
                 expect({
+                    id: body.id,
+                    carId: body.carId,
                     name: body.name,
                     purchaseDate: body.purchaseDate,
                 }).toStrictEqual(ownersService.create());

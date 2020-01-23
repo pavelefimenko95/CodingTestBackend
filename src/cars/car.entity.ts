@@ -14,13 +14,13 @@ export class Car extends Model<Car> {
     @Column
     firstRegistrationDate: Date;
 
-    @HasMany(() => Owner, {onDelete: 'CASCADE'})
+    @HasMany(() => Owner)
     owners: Owner[];
 
     @ForeignKey(() => Manufacturer)
     @Column
     manufacturerId: number;
 
-    @BelongsTo(() => Manufacturer)
+    @BelongsTo(() => Manufacturer, {onDelete: 'cascade'})
     manufacturer: Manufacturer;
 }

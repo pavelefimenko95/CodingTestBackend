@@ -5,19 +5,24 @@ import { INestApplication } from '@nestjs/common';
 
 export default () => {
     let app: INestApplication;
+
+    const dtoCommonFields = {
+        price: 123,
+        firstRegistrationDate: '2019-10-15T00:00:00.000Z',
+    };
+
     const carsService = {
-        findAll: () => ({
-            price: 123,
-            firstRegistrationDate: '2019-10-15T00:00:00.000Z',
-        }),
+        findAll: () => dtoCommonFields,
         findOne: () => ({
-            price: 123,
-            firstRegistrationDate: '2019-10-15T00:00:00.000Z',
+            id: 1,
+            manufacturerId: 1,
+            ...dtoCommonFields,
         }),
         update: () => [1],
         create: () => ({
-            price: 123,
-            firstRegistrationDate: '2019-10-15T00:00:00.000Z',
+            id: 1,
+            manufacturerId: 1,
+            ...dtoCommonFields,
         }),
     };
 
@@ -36,8 +41,8 @@ export default () => {
     it(`/POST cars`, done => {
         const carDto = {
             id: 1,
-            price: 123,
-            firstRegistrationDate: '2019-10-15T00:00:00.000Z',
+            manufacturerId: 1,
+            ...dtoCommonFields,
         };
 
         return request(app.getHttpServer())
@@ -48,6 +53,8 @@ export default () => {
             .expect(201)
             .expect(({body}) => {
                 expect({
+                    id: body.id,
+                    manufacturerId: body.manufacturerId,
                     price: body.price,
                     firstRegistrationDate: body.firstRegistrationDate,
                 }).toStrictEqual(carsService.create());
@@ -78,21 +85,8 @@ export default () => {
             .expect(200)
             .expect(({body}) => {
                 expect({
-                    price: body.price,
-                    firstRegistrationDate: body.firstRegistrationDate,
-                }).toStrictEqual(carsService.findOne());
-            })
-            .end(done);
-    });
-
-    it(`/GET car`, done => {
-        const carToRequestId = 1;
-
-        return request(app.getHttpServer())
-            .get(`/cars/${carToRequestId}`)
-            .expect(200)
-            .expect(({body}) => {
-                expect({
+                    id: body.id,
+                    manufacturerId: body.manufacturerId,
                     price: body.price,
                     firstRegistrationDate: body.firstRegistrationDate,
                 }).toStrictEqual(carsService.findOne());
@@ -104,7 +98,6 @@ export default () => {
         const updateCarDto = {
             id: 1,
             price: 321,
-            firstRegistrationDate: '2019-10-15T00:00:00.000Z',
         };
 
         return request(app.getHttpServer())
@@ -127,6 +120,20 @@ export default () => {
     });
 
     afterAll(async () => {
+        // mocking for the next test
+        const carDto = {
+            id: 1,
+            manufacturerId: 1,
+            ...dtoCommonFields,
+        };
+
+        await request(app.getHttpServer())
+            .post('/cars')
+            .send(carDto)
+            .set('Accept', 'application/json')
+            .expect('Content-Type', /json/)
+            .expect(201);
+
         await app.close();
     });
 };

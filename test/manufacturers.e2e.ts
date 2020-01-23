@@ -5,16 +5,18 @@ import { INestApplication } from '@nestjs/common';
 
 export default () => {
     let app: INestApplication;
+
+    const dtoCommonFields = {
+        name: 'pl',
+        phone: '+302342344334',
+        siret: 234234234,
+    };
+
     const manufacturersService = {
-        findAll: () => ({
-            name: 'pl',
-            phone: '+302342344334',
-            siret: 234234234,
-        }),
+        findAll: () => dtoCommonFields,
         create: () => ({
-            name: 'pl',
-            phone: '+302342344334',
-            siret: 234234234,
+            id: 1,
+            ...dtoCommonFields,
         }),
     };
 
@@ -28,14 +30,17 @@ export default () => {
 
         app = module.createNestApplication();
         await app.init();
+
+        const manufacturerToDeleteId = 1;
+        await request(app.getHttpServer())
+            .delete(`/manufacturers/${manufacturerToDeleteId}`)
+            .expect(200);
     });
 
     it(`/POST manufacturers`, done => {
         const manufacturerDto = {
             id: 1,
-            name: 'pl',
-            phone: '+302342344334',
-            siret: 234234234,
+            ...dtoCommonFields,
         };
 
         return request(app.getHttpServer())
@@ -46,6 +51,7 @@ export default () => {
             .expect(201)
             .expect(({body}) => {
                 expect({
+                    id: body.id,
                     name: body.name,
                     phone: body.phone,
                     siret: body.siret,
@@ -80,6 +86,19 @@ export default () => {
     });
 
     afterAll(async () => {
+        // mocking for the next test
+        const manufacturerDto = {
+            id: 1,
+            ...dtoCommonFields,
+        };
+
+        await request(app.getHttpServer())
+            .post('/manufacturers')
+            .send(manufacturerDto)
+            .set('Accept', 'application/json')
+            .expect('Content-Type', /json/)
+            .expect(201);
+
         await app.close();
     });
 };
