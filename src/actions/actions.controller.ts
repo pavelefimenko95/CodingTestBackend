@@ -35,11 +35,13 @@ export class ActionsController {
                     [Op.gt]: moment().subtract(18, 'months'),
                     [Op.lt]: moment().subtract(12, 'months'),
                 },
+                discount: null,
             },
         });
         await Promise.all(carsToApplyDiscount.map(car =>
             this.carsService.update({
                 price: car.price * DISCOUNT,
+                discount: DISCOUNT,
             }, {
                 where: {
                     id: car.id,

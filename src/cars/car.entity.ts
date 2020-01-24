@@ -1,4 +1,4 @@
-import { Table, Column, Model, AllowNull, NotEmpty, ForeignKey, HasMany, BelongsTo } from 'sequelize-typescript';
+import { Table, Column, Model, AllowNull, NotEmpty, ForeignKey, HasMany, BelongsTo, Default, DataType } from 'sequelize-typescript';
 import { Manufacturer } from '../manufacturers/manufacturer.entity';
 import { Owner } from '../owners/owner.entity';
 
@@ -16,6 +16,10 @@ export class Car extends Model<Car> {
 
     @HasMany(() => Owner)
     owners: Owner[];
+
+    @Default(null)
+    @Column(DataType.FLOAT)
+    discount: number | null;
 
     @ForeignKey(() => Manufacturer)
     @Column

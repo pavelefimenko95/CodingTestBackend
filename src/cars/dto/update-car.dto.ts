@@ -10,6 +10,9 @@ export class UpdateCarDto {
     @IsDate()
     readonly firstRegistrationDate?: Date;
 
+    @IsNumber()
+    readonly discount?: number;
+
     @IsString()
     readonly manufacturerId?: string;
 }
