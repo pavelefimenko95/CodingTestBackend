@@ -1,4 +1,4 @@
-version: '3'
+version: '3.7'
 services:
   app:
     container_name: CodingTestBackEnd
@@ -16,3 +16,5 @@ services:
           MYSQL_ROOT_PASSWORD: root
     ports:
       - '3306:3306'
+    volumes:
+      - ./MySQLData:/var/lib/mysql
