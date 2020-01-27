@@ -1,0 +1,7 @@
+version: 2
+jobs:
+  build:
+    steps:
+      - checkout
+      - run: npm install
+      - run: npm run compose:test
