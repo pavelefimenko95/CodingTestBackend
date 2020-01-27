@@ -2,8 +2,8 @@ version: '3.7'
 services:
   app:
     container_name: CodingTestBackEnd
-    restart: always
     build: .
+    command: ['./bash/wait-for-it.sh', 'mysql:3306', '--', 'npm', 'start']
     ports:
       - '3000:3000'
     links:
@@ -12,8 +12,8 @@ services:
     container_name: CodingTestBackEndMySQL
     image: mysql
     environment:
-          MYSQL_DATABASE: appDb
-          MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: appDb
+      MYSQL_ROOT_PASSWORD: root
     ports:
       - '3306:3306'
     volumes:

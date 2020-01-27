@@ -8,6 +8,6 @@ RUN npm install
 
 COPY . .
 
-EXPOSE 3000
+RUN chmod +x ./bash/wait-for-it.sh
 
-CMD ["npm", "start"]
+EXPOSE 3000
