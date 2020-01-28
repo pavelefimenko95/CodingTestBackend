@@ -9,4 +9,3 @@ jobs:
       - setup_remote_docker
       - run: npm install
       - run: npm run compose:test
-      - run: exit "$(git diff | wc -l)"
