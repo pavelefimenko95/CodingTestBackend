@@ -53,7 +53,7 @@ export default () => {
             .expect(201)
             .expect(({body}) => {
                 expect({
-                    id: body.id,
+                    id: 2,
                     manufacturerId: body.manufacturerId,
                     price: body.price,
                     firstRegistrationDate: body.firstRegistrationDate,
