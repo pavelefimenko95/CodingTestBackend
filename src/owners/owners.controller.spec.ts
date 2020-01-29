@@ -49,7 +49,7 @@ describe('OwnersController', () => {
 
             jest.spyOn(ownersService, 'create').mockImplementation(async () => result);
 
-            expect(await ownersController.create(createOwnerDto)).toBe(1);
+            expect(await ownersController.create(createOwnerDto)).toBe(result);
         });
     });
 
