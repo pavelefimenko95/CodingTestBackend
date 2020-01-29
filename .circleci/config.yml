@@ -7,5 +7,5 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
-      - run: npm run compose:test
+      - run: npm run compose:test && exit "$(git diff | wc -l)"
       - run: npm run compose:test:e2e
