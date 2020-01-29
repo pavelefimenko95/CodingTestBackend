@@ -10,7 +10,7 @@
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
     "compose": "docker-compose down && docker-compose build --no-cache && docker-compose up",
-    "compose:test": "docker-compose --file docker-compose.test.yml down && docker-compose --file docker-compose.test.yml build && docker-compose --file docker-compose.test.yml up -d && docker logs -f CodingTestBackEnd && docker wait CodingTestBackEnd",
+    "compose:test": "docker-compose --file docker-compose.test.yml down && docker-compose --file docker-compose.test.yml build && docker-compose --file docker-compose.test.yml up -d && docker wait CodingTestBackEnd",
     "compose:test:e2e": "docker-compose --file docker-compose.test.e2e.yml down && docker-compose --file docker-compose.test.e2e.yml build && docker-compose --file docker-compose.test.e2e.yml up -d",
     "docker:clear:cache": "sudo docker system prune -a && sudo docker volume prune",
     "start:dev": "nest start --watch",
