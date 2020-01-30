@@ -2,9 +2,9 @@ import { Sequelize } from 'sequelize-typescript';
 import { Owner } from '../owners/owner.entity';
 import { Manufacturer } from '../manufacturers/manufacturer.entity';
 import { Car } from '../cars/car.entity';
-import * as dbConfig from '../config/dbConfig';
+import * as dbConfig from '../config/dbConfig.json';
 
-const config: object = dbConfig;
+const config: any = dbConfig;
 
 export const databaseProviders = [
     {
