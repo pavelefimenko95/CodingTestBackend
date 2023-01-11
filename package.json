@@ -28,7 +28,7 @@
     "@nestjs/core": "^6.7.2",
     "@nestjs/platform-express": "^6.7.2",
     "@nestjs/swagger": "^4.1.15",
-    "class-validator": "^0.11.0",
+    "class-validator": "^0.14.0",
     "cron": "^1.8.1",
     "moment": "^2.24.0",
     "mysql2": "^2.1.0",
